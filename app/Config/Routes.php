@@ -1,10 +1,9 @@
 <?php
 
 namespace Config;
-
-// Create a new instance of our RouteCollection class.
-$routes = Services::routes();
-
+// header('Access-Control-Allow-Origin: *');
+// header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, token, Content-Type, Accept, Access-Control-Request-Method");
+// header("Access-Control-Allow-Methods: GET, POST");
 /*
  * --------------------------------------------------------------------
  * Router Setup
@@ -15,11 +14,12 @@ $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
+
 // The Auto Routing (Legacy) is very dangerous. It is easy to create vulnerable apps
 // where controller filters or CSRF protection are bypassed.
 // If you don't want to define all routes, please use the Auto Routing (Improved).
 // Set `$autoRoutesImproved` to true in `app/Config/Feature.php` and set the following to true.
-// $routes->setAutoRoute(false);
+$routes->setAutoRoute(true);
 
 /*
  * --------------------------------------------------------------------
@@ -37,6 +37,14 @@ $routes->post('/getUser', 'Home::getUser');
 $routes->post('/updateUser', 'Home::updateUser');
 $routes->get('/users', 'Home::usersView');
 $routes->post('/auth', 'Home::authUser');
+$routes->post('/home', 'Home::index');
+ 
+$routes->get('api/users', 'LoginController::getUsers'); 
+$routes->post('api/register', 'LoginController::registerUser');
+$routes->post('api/updateUser', 'LoginController::updateUser');
+$routes->post('api/auth', 'LoginController::authUser'); 
+$routes->post('api/deleteUser', 'LoginController::deleteUser'); 
+
 
 /*
  * --------------------------------------------------------------------

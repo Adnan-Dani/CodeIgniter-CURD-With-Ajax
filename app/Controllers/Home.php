@@ -8,7 +8,7 @@ class Home extends BaseController
 {
     public function index()
     {
-        $data['title'] = 'Login Account';
+         $data['title'] = 'Register Account';
         return view('index.php', $data);
     }
     function registerView()
